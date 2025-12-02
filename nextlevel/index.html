@@ -10,14 +10,14 @@
 body {
   margin:0;
   font-family:'Montserrat',sans-serif;
-  background:#050505;
+  background:#000; /* Sfondo completamente nero */
   color:#fff;
   text-align:center;
 }
 
 /* HEADER */
 .site-header {
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   padding:15px 0;
   position:sticky;
   top:0;
@@ -27,7 +27,7 @@ body {
 .nav-menu {
   display:flex;
   justify-content:center;
-  flex-wrap:wrap;   /* RESPONSIVE FIX */
+  flex-wrap:wrap;  
   list-style:none;
   padding:0;
   margin:0;
@@ -52,21 +52,26 @@ body {
 }
 
 .logo-home {
-  max-width:250px;
+  max-width:200px; /* più piccolo per mobile */
   margin-bottom:20px;
 }
 
+.hero h1 {
+  font-size:2em;
+  margin-bottom:10px;
+}
+
 .coming {
-  font-size:2.8em;
-  margin-top:20px;
+  font-size:2em; /* ridotto per mobile */
+  margin-top:15px;
   font-weight:700;
-  letter-spacing:2px;
+  letter-spacing:1px;
   color:#0af;
 }
 
 /* HOURGLASS */
 .hourglass-container {
-  margin:50px auto 20px;
+  margin:40px auto 20px;
   width:80px;
   height:140px;
   position:relative;
@@ -143,38 +148,61 @@ body {
 .site-footer {
   text-align:center;
   padding:20px 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   font-size:0.9em;
   margin-top:60px;
 }
 
-/* --------------------- RESPONSIVE MOBILE --------------------- */
+/* --------------------- MOBILE RESPONSIVE --------------------- */
 @media (max-width: 768px) {
 
   .logo-home {
-    max-width:180px;
+    max-width:150px;
+  }
+
+  .hero {
+    padding:70px 15px 40px;
+  }
+
+  .hero h1 {
+    font-size:1.6em;
   }
 
   .coming {
-    font-size:2em;
+    font-size:1.5em;
     letter-spacing:1px;
   }
 
   .hourglass-container {
-    width:70px;
-    height:120px;
+    width:60px;
+    height:110px;
+    margin:30px auto 15px;
   }
 
   .nav-menu {
     gap:12px;
     font-size:0.9em;
   }
-
-  .hero {
-    padding:70px 15px 40px;
-  }
 }
 
+@media (max-width: 450px) {
+  .logo-home {
+    max-width:120px;
+  }
+
+  .hero h1 {
+    font-size:1.4em;
+  }
+
+  .coming {
+    font-size:1.3em;
+  }
+
+  .hourglass-container {
+    width:50px;
+    height:90px;
+  }
+}
 </style>
 </head>
 <body>

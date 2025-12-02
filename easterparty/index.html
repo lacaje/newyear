@@ -10,13 +10,13 @@
 body {
   margin:0;
   font-family:'Montserrat', sans-serif;
-  background:#050505;
+  background:#000; /* sfondo uniforme nero */
   color:#fff;
 }
 
 /* HEADER */
 .site-header {
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   padding:15px 0;
   position:sticky;
   top:0;
@@ -26,7 +26,7 @@ body {
 .nav-menu {
   display:flex;
   justify-content:center;
-  flex-wrap:wrap; /* FIX smartphone */
+  flex-wrap:wrap; 
   list-style:none;
   padding:0;
   margin:0;
@@ -50,8 +50,20 @@ body {
 }
 
 .logo-home {
-  max-width:240px;
+  max-width:180px; /* più piccolo su mobile */
   margin-bottom:20px;
+}
+
+/* HERO TEXT */
+.hero h1 {
+  font-size:2.2em; /* più piccolo su mobile */
+  margin-bottom:15px;
+}
+
+.hero p {
+  font-size:1em; /* più leggibile su mobile */
+  margin:0 auto;
+  max-width:300px; /* non troppo largo su smartphone */
 }
 
 /* GALLERY */
@@ -100,7 +112,7 @@ body {
 .site-footer {
   text-align:center;
   padding:20px 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   font-size:0.9em;
   margin-top:40px;
 }
@@ -109,21 +121,22 @@ body {
 @media (max-width: 768px) {
 
   .logo-home {
-    max-width:180px;
+    max-width:140px;
   }
 
-  h1 { font-size:1.9em; }
+  .hero h1 {
+    font-size:1.8em;
+    margin-bottom:10px;
+  }
+
+  .hero p {
+    font-size:0.95em;
+    max-width:260px;
+  }
 
   .gallery img {
-    width:48%;       /* 2 foto per riga su smartphone */
+    width:48%; /* 2 foto per riga */
     height:140px;
-  }
-
-  @media (max-width: 450px) {
-    .gallery img {
-      width:100%;    /* 1 foto per riga su telefoni piccoli */
-      height:180px;
-    }
   }
 
   .telegram-box {
@@ -136,6 +149,25 @@ body {
   }
 }
 
+@media (max-width: 450px) {
+  .gallery img {
+    width:100%; /* 1 foto per riga */
+    height:180px;
+  }
+
+  .hero h1 {
+    font-size:1.6em;
+  }
+
+  .hero p {
+    font-size:0.9em;
+    max-width:220px;
+  }
+
+  .logo-home {
+    max-width:120px;
+  }
+}
 </style>
 </head>
 <body>

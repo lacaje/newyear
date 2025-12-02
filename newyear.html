@@ -9,7 +9,7 @@
     body {
       margin:0;
       font-family:'Montserrat',sans-serif;
-      background:#050505;
+      background:#000; /* sfondo nero uniforme */
       color:#fff;
     }
 
@@ -171,7 +171,6 @@
         font-size: 0.9em;
       }
     }
-
   </style>
 </head>
 <body>
@@ -194,7 +193,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <video autoplay muted loop playsinline>
+    <video id="hero-video" autoplay muted loop playsinline>
       <source src="assets/fireworks.mp4" type="video/mp4">
     </video>
 
@@ -230,6 +229,22 @@
 
   <!-- SCRIPT -->
   <script>
+    // HERO VIDEO AUTOPLAY MOBILE
+    const video = document.getElementById('hero-video');
+
+    const playVideo = () => {
+      video.play().catch(err => {
+        console.log("Autoplay bloccato, riprovo con user gesture", err);
+      });
+    }
+
+    playVideo();
+
+    document.body.addEventListener('touchstart', () => {
+      playVideo();
+    }, {once:true});
+
+    // FORM POPUP
     const prenotaBtn = document.getElementById('prenota-btn');
     const formPopup = document.getElementById('form-popup');
     const closeBtn = document.getElementById('close-form');
@@ -251,14 +266,14 @@
     }
 
     submitBtn.addEventListener('click', () => {
-      const nome = nome.value.trim();
-      const cognome = cognome.value.trim();
-      const sesso = sesso.value;
-      const anno = anno.value.trim();
-      const insta = instagram.value.trim();
-      const tel = telefono.value.trim();
+      const nomeVal = document.getElementById('nome').value.trim();
+      const cognomeVal = document.getElementById('cognome').value.trim();
+      const sessoVal = document.getElementById('sesso').value;
+      const annoVal = document.getElementById('anno').value.trim();
+      const instaVal = document.getElementById('instagram').value.trim();
+      const telVal = document.getElementById('telefono').value.trim();
 
-      if (!nome || !cognome || !sesso || !anno || !insta || !tel) {
+      if (!nomeVal || !cognomeVal || !sessoVal || !annoVal || !instaVal || !telVal) {
         msg.style.color = 'red';
         msg.textContent = "Compila tutti i campi!";
         return;
@@ -270,12 +285,12 @@
       const payload = {
         data: [
           {
-            "NOME": nome,
-            "COGNOME": cognome,
-            "SESSO": sesso,
-            "ANNO DI NASCITA": anno,
-            "INSTAGRAM": insta,
-            "TELEFONO": tel
+            "NOME": nomeVal,
+            "COGNOME": cognomeVal,
+            "SESSO": sessoVal,
+            "ANNO DI NASCITA": annoVal,
+            "INSTAGRAM": instaVal,
+            "TELEFONO": telVal
           }
         ]
       };

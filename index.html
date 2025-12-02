@@ -6,14 +6,15 @@
   <title>LA CAJE EVENTS — Home</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* --- BASE --- */
     body {
       margin:0;
       font-family:'Montserrat', sans-serif;
-      background:#050505;
+      background:#000; /* sfondo completamente nero */
       color:#fff;
     }
 
-    /* HEADER */
+    /* --- HEADER --- */
     .site-header {
       background: rgba(0,0,0,0.8);
       padding:15px 0;
@@ -28,7 +29,7 @@
       padding:0;
       margin:0;
       gap:25px;
-      flex-wrap:wrap; /* permette al menu di andare a capo */
+      flex-wrap:wrap;
     }
     .nav-link {
       text-decoration:none;
@@ -40,21 +41,21 @@
       color:#0af;
     }
 
-    /* HERO */
+    /* --- HERO --- */
     .hero {
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:50px 20px;
+      padding:60px 20px;
     }
     .logo-home {
       max-width:250px;
       margin-bottom:20px;
     }
 
-    /* POPUP NEXT EVENT */
+    /* --- NEXT EVENT POPUP --- */
     #next-event-popup {
       display:flex;
       justify-content:center;
@@ -77,33 +78,35 @@
       box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
 
-    /* COUNTDOWN SECTION */
+    /* --- COUNTDOWN --- */
     #countdown-section {
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      margin:0 auto 50px;
-      text-align:center;
-      font-family:'Montserrat',sans-serif;
-      flex-wrap:wrap; /* evita overflow */
+      display: flex;
+      justify-content: center;   /* Centra i box */
+      gap: 25px;                 /* Spazio tra i box */
+      margin: 30px 0 50px;       
+      text-align: center;
     }
     #countdown-section .countdown-box {
-      padding:15px 20px;
-      border-radius:12px;
-      background: rgba(255,255,255,0.1);
-      color:#fff;
-      min-width:70px;
+      padding: 20px 25px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      min-width: 90px;
+      transition: transform 0.3s;
+    }
+    #countdown-section .countdown-box:hover {
+      transform: scale(1.05);
     }
     #countdown-section .countdown-box div:first-child {
-      font-size:3em;
-      font-weight:700;
+      font-size: 3em;
+      font-weight: 700;
     }
     #countdown-section .countdown-box div:last-child {
-      font-size:0.9em;
-      margin-top:5px;
+      font-size: 1em;
+      margin-top: 5px;
+      letter-spacing: 1px;
     }
 
-    /* ABOUT */
+    /* --- ABOUT --- */
     .about {
       display:flex;
       justify-content:center;
@@ -119,7 +122,7 @@
       min-width:250px;
     }
 
-    /* SOCIAL LINKS */
+    /* --- SOCIAL LINKS --- */
     .social-links {
       display:flex;
       justify-content:center;
@@ -131,7 +134,7 @@
       height:40px;
     }
 
-    /* FOOTER */
+    /* --- FOOTER --- */
     .site-footer {
       text-align:center;
       padding:20px 0;
@@ -139,41 +142,15 @@
       font-size:0.9em;
     }
 
-    /* --- RESPONSIVE FOR SMARTPHONES --- */
+    /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
-
-      .nav-menu {
-        gap: 12px;
-        font-size: 0.9em;
-        padding: 0 10px;
-      }
-
-      .logo-home {
-        max-width: 180px;
-      }
-
-      #next-event-popup {
-        font-size: 1em;
-        padding: 12px 15px;
-        width: 95%;
-      }
-
-      #countdown-section {
-        gap: 12px;
-      }
-      #countdown-section .countdown-box {
-        min-width: 100px;
-      }
-
-      .about {
-        flex-direction: column;
-        padding: 0 15px;
-      }
-
-      .social-icon {
-        width: 32px;
-        height: 32px;
-      }
+      .nav-menu { gap: 12px; font-size: 0.9em; padding: 0 10px; }
+      .logo-home { max-width: 180px; }
+      #next-event-popup { font-size: 1em; padding: 12px 15px; width: 95%; }
+      #countdown-section { gap: 12px; flex-wrap:wrap; }
+      #countdown-section .countdown-box { min-width: 80px; }
+      .about { flex-direction: column; padding: 0 15px; }
+      .social-icon { width: 32px; height: 32px; }
     }
   </style>
 </head>
@@ -185,7 +162,6 @@
       <ul class="nav-menu">
         <li><a href="newyear.html" class="nav-link">New Year Party</a></li>
         <li><a href="nextlevel/index.html" class="nav-link">Next Level</a></li>
-
         <li><a href="whiteparty/whiteparty.html" class="nav-link">White Party</a></li>
         <li><a href="summervibes/summervibes.html" class="nav-link">Summer Vibes</a></li>
         <li><a href="easterparty/index.html" class="nav-link">Easter Party</a></li>
