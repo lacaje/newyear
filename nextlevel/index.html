@@ -5,29 +5,176 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LA CAJE EVENTS — Next Level</title>
 <link rel="stylesheet" href="../styles.css">
+
 <style>
-body { margin:0; font-family:'Montserrat',sans-serif; background:#050505; color:#fff; text-align:center; }
-.site-header { background: rgba(0,0,0,0.8); padding:15px 0; position:sticky; top:0; z-index:100; }
-.nav-menu { display:flex; justify-content:center; list-style:none; padding:0; margin:0; gap:25px; }
-.nav-link { text-decoration:none; color:#fff; font-weight:700; transition:0.3s; }
-.nav-link:hover, .nav-link.active { color:#0af; }
+body {
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:#050505;
+  color:#fff;
+  text-align:center;
+}
 
-.hero { padding:100px 20px 50px; }
-.logo-home { max-width:250px; margin-bottom:20px; }
-.coming { font-size:2.8em; margin-top:20px; font-weight:700; letter-spacing:2px; color:#0af; }
+/* HEADER */
+.site-header {
+  background: rgba(0,0,0,0.8);
+  padding:15px 0;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
 
-.hourglass-container { margin:50px auto 20px; width:80px; height:140px; position:relative; }
-.hourglass-body { width:100%; height:100%; border:4px solid #0af; border-radius:12px; position:relative; box-shadow:0 0 15px #0af,inset 0 0 20px rgba(0,150,255,0.3); overflow:hidden; backdrop-filter:blur(3px); }
-.sand-top { position:absolute; top:0; width:100%; height:50%; background:linear-gradient(#0af,#009bff); animation: topSand 2.5s infinite ease-in-out; }
-.sand-stream { position:absolute; top:45%; left:50%; width:6px; height:0; transform:translateX(-50%); background:#0af; border-radius:3px; animation:sandFlow 2.5s infinite ease-in-out; box-shadow:0 0 8px #0af; }
-.sand-bottom { position:absolute; bottom:0; width:100%; height:0%; background:linear-gradient(#009bff,#0af); animation: bottomSand 2.5s infinite ease-in-out; }
+.nav-menu {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;   /* RESPONSIVE FIX */
+  list-style:none;
+  padding:0;
+  margin:0;
+  gap:20px;
+}
 
-@keyframes topSand { 0% { height:50%; } 60% { height:0%; } 100% { height:50%; } }
-@keyframes sandFlow { 0% { height:0; opacity:1; } 50% { height:40px; opacity:1; } 60% { opacity:0; } 100% { height:0; opacity:0; } }
-@keyframes bottomSand { 0% { height:0%; } 60% { height:50%; } 100% { height:0%; } }
+.nav-link {
+  text-decoration:none;
+  color:#fff;
+  font-weight:700;
+  transition:0.3s;
+}
 
-.label { margin-top:15px; font-size:1em; opacity:0.7; }
-.site-footer { text-align:center; padding:20px 0; background: rgba(0,0,0,0.8); font-size:0.9em; margin-top:60px; }
+.nav-link:hover,
+.nav-link.active {
+  color:#0af;
+}
+
+/* HERO */
+.hero {
+  padding:100px 20px 50px;
+}
+
+.logo-home {
+  max-width:250px;
+  margin-bottom:20px;
+}
+
+.coming {
+  font-size:2.8em;
+  margin-top:20px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:#0af;
+}
+
+/* HOURGLASS */
+.hourglass-container {
+  margin:50px auto 20px;
+  width:80px;
+  height:140px;
+  position:relative;
+}
+
+.hourglass-body {
+  width:100%;
+  height:100%;
+  border:4px solid #0af;
+  border-radius:12px;
+  position:relative;
+  box-shadow:0 0 15px #0af, inset 0 0 20px rgba(0,150,255,0.3);
+  overflow:hidden;
+  backdrop-filter:blur(3px);
+}
+
+.sand-top {
+  position:absolute;
+  top:0;
+  width:100%;
+  height:50%;
+  background:linear-gradient(#0af,#009bff);
+  animation: topSand 2.5s infinite ease-in-out;
+}
+
+.sand-stream {
+  position:absolute;
+  top:45%;
+  left:50%;
+  width:6px;
+  height:0;
+  transform:translateX(-50%);
+  background:#0af;
+  border-radius:3px;
+  animation:sandFlow 2.5s infinite ease-in-out;
+  box-shadow:0 0 8px #0af;
+}
+
+.sand-bottom {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:0%;
+  background:linear-gradient(#009bff,#0af);
+  animation: bottomSand 2.5s infinite ease-in-out;
+}
+
+@keyframes topSand {
+  0% { height:50%; }
+  60% { height:0%; }
+  100% { height:50%; }
+}
+
+@keyframes sandFlow {
+  0% { height:0; opacity:1; }
+  50% { height:40px; opacity:1; }
+  60% { opacity:0; }
+  100% { height:0; opacity:0; }
+}
+
+@keyframes bottomSand {
+  0% { height:0%; }
+  60% { height:50%; }
+  100% { height:0%; }
+}
+
+.label {
+  margin-top:15px;
+  font-size:1em;
+  opacity:0.7;
+}
+
+/* FOOTER */
+.site-footer {
+  text-align:center;
+  padding:20px 0;
+  background: rgba(0,0,0,0.8);
+  font-size:0.9em;
+  margin-top:60px;
+}
+
+/* --------------------- RESPONSIVE MOBILE --------------------- */
+@media (max-width: 768px) {
+
+  .logo-home {
+    max-width:180px;
+  }
+
+  .coming {
+    font-size:2em;
+    letter-spacing:1px;
+  }
+
+  .hourglass-container {
+    width:70px;
+    height:120px;
+  }
+
+  .nav-menu {
+    gap:12px;
+    font-size:0.9em;
+  }
+
+  .hero {
+    padding:70px 15px 40px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -43,7 +190,6 @@ body { margin:0; font-family:'Montserrat',sans-serif; background:#050505; color:
         <li><a href="../summervibes/summervibes.html" class="nav-link">Summer Vibes</a></li>
         <li><a href="../whiteparty/whiteparty.html" class="nav-link">White Party</a></li>
         <li><a href="../easterparty/index.html" class="nav-link">Easter Party</a></li>
-
       </ul>
     </nav>
   </div>
@@ -51,7 +197,10 @@ body { margin:0; font-family:'Montserrat',sans-serif; background:#050505; color:
 
 <!-- HERO -->
 <section class="hero">
-  <a href="../index.html"><img src="../assets/assets_la_caje.png" alt="LA CAJE EVENTS" class="logo-home"></a>
+  <a href="../index.html">
+    <img src="../assets/assets_la_caje.png" alt="LA CAJE EVENTS" class="logo-home">
+  </a>
+
   <h1>Next Level</h1>
   <p class="coming">COMING SOON</p>
 

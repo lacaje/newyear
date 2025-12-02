@@ -28,6 +28,7 @@
       padding:0;
       margin:0;
       gap:25px;
+      flex-wrap:wrap; /* permette al menu di andare a capo */
     }
     .nav-link {
       text-decoration:none;
@@ -84,6 +85,7 @@
       margin:0 auto 50px;
       text-align:center;
       font-family:'Montserrat',sans-serif;
+      flex-wrap:wrap; /* evita overflow */
     }
     #countdown-section .countdown-box {
       padding:15px 20px;
@@ -136,6 +138,43 @@
       background: rgba(0,0,0,0.8);
       font-size:0.9em;
     }
+
+    /* --- RESPONSIVE FOR SMARTPHONES --- */
+    @media (max-width: 768px) {
+
+      .nav-menu {
+        gap: 12px;
+        font-size: 0.9em;
+        padding: 0 10px;
+      }
+
+      .logo-home {
+        max-width: 180px;
+      }
+
+      #next-event-popup {
+        font-size: 1em;
+        padding: 12px 15px;
+        width: 95%;
+      }
+
+      #countdown-section {
+        gap: 12px;
+      }
+      #countdown-section .countdown-box {
+        min-width: 100px;
+      }
+
+      .about {
+        flex-direction: column;
+        padding: 0 15px;
+      }
+
+      .social-icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -158,12 +197,10 @@
   <section class="hero">
     <a href="index.html"><img src="assets/assets_la_caje.png" alt="LA CAJE EVENTS" class="logo-home"></a>
     
-    <!-- NEXT EVENT POPUP -->
     <div id="next-event-popup" onclick="window.location.href='newyear.html'">
       Next Event — New Year Party 🎉
     </div>
 
-    <!-- COUNTDOWN SEPARATO -->
     <div id="countdown-section">
       <div class="countdown-box">
         <div id="days">0</div>

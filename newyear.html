@@ -6,89 +6,172 @@
   <title>LA CAJE EVENTS — New Year Party</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    body { margin:0; font-family:'Montserrat',sans-serif; background:#050505; color:#fff; }
-    .hero { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; justify-content:center; align-items:center; text-align:center; }
-    .hero video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
-    .hero-content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:20px; }
-    .cta { padding:12px 35px; background:#0af; color:#000; border-radius:50px; font-weight:700; text-decoration:none; transition:0.25s; cursor:pointer; }
+    body {
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      background:#050505;
+      color:#fff;
+    }
+
+    /* NAV BAR */
+    .nav-menu {
+      display:flex;
+      justify-content:center;
+      list-style:none;
+      padding:0;
+      margin:0;
+      gap:25px;
+      flex-wrap:wrap; /* FIX smartphone */
+    }
+    .nav-link {
+      text-decoration:none;
+      color:#fff;
+      font-weight:700;
+    }
+    .nav-link.active { color:#0af; }
+
+    /* HERO VIDEO */
+    .hero {
+      position:relative;
+      width:100%;
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+    .hero video {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:0;
+      pointer-events:none;
+    }
+    .hero-content {
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:20px;
+      padding:0 20px;
+    }
+    .hero-content h1 {
+      font-size:3em;
+      font-weight:800;
+      text-shadow:0 0 15px rgba(255,255,255,0.4);
+    }
+
+    .cta {
+      padding:12px 35px;
+      background:#0af;
+      color:#000;
+      border-radius:50px;
+      font-weight:700;
+      text-decoration:none;
+      transition:0.25s;
+      cursor:pointer;
+    }
     .cta:hover { background:#00d5ff; }
 
+    /* POPUP FORM */
     #form-popup {
-      display:none; 
-      position:fixed; 
-      top:0; left:0; width:100%; height:100%; 
-      background: rgba(0,0,0,0.85); 
-      justify-content:center; 
-      align-items:center; 
+      display:none;
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.85);
+      justify-content:center;
+      align-items:center;
       z-index:20;
-      animation: fadeIn 0.3s ease forwards;
+      padding:15px;
     }
 
     #form-inner {
       background: linear-gradient(135deg, rgba(10,200,255,0.2), rgba(0,150,255,0.1));
-      padding: 35px;
+      padding: 30px 20px;
       border-radius: 20px;
-      display:flex; 
-      flex-direction:column; 
-      gap:15px; 
-      width:90%; 
-      max-width:450px;
-      box-shadow: 0 0 30px rgba(0,200,255,0.5);
-      transform: scale(0.8);
-      opacity: 0;
-      animation: popupIn 0.4s forwards;
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+      width:100%;
+      max-width:420px;
+      box-shadow:0 0 30px rgba(0,200,255,0.5);
     }
 
-    #form-inner input, #form-inner select {
-      padding:12px; 
-      border-radius:8px; 
-      border:none; 
-      outline:none; 
-      font-size:16px; 
-      background: rgba(255,255,255,0.1); 
+    #form-inner input,
+    #form-inner select {
+      padding:12px;
+      border-radius:8px;
+      border:none;
+      background: rgba(255,255,255,0.12);
       color:#fff;
+      font-size:16px;
     }
 
-    #form-inner input::placeholder,
-    #form-inner select { color:#ddd; }
+    #form-inner input::placeholder { color:#ddd; }
 
     #submit-form {
-      padding:12px; 
-      background:#0af; 
-      color:#000; 
-      border:none; 
-      border-radius:50px; 
-      font-weight:700; 
+      padding:12px;
+      background:#0af;
+      color:#000;
+      border:none;
+      border-radius:50px;
+      font-weight:700;
       cursor:pointer;
-      transition:0.3s;
     }
-
-    #submit-form:hover { background:#00d5ff; }
 
     #close-form {
-      background:#ff0033; 
-      color:#fff; 
-      border:none; 
-      border-radius:50px; 
-      padding:10px; 
+      padding:10px;
+      background:#ff0033;
+      border:none;
+      border-radius:50px;
+      color:white;
       cursor:pointer;
-      margin-top:10px;
-      transition:0.3s;
     }
 
-    #close-form:hover { background:#ff3366; }
-
-    #form-msg { font-weight:700; text-align:center; margin-top:10px; }
-
-    @keyframes fadeIn {
-      from { opacity:0; }
-      to { opacity:1; }
+    #form-msg {
+      font-weight:700;
+      text-align:center;
     }
 
-    @keyframes popupIn {
-      from { transform: scale(0.8); opacity:0; }
-      to { transform: scale(1); opacity:1; }
+    /* ------------------- SMARTPHONE FIXES ------------------- */
+    @media (max-width: 768px) {
+
+      .hero {
+        height: 85vh; /* migliore taglio video smartphone */
+      }
+
+      .hero-content h1 {
+        font-size: 2.2em;
+      }
+
+      .cta {
+        padding: 12px 28px;
+        font-size: 1em;
+      }
+
+      #form-inner {
+        padding:20px 18px;
+        max-width: 360px;
+      }
+
+      #form-inner input,
+      #form-inner select {
+        font-size:15px;
+        padding:10px;
+      }
+
+      .nav-menu {
+        gap: 12px;
+        font-size: 0.9em;
+      }
     }
+
   </style>
 </head>
 <body>
@@ -98,26 +181,23 @@
     <div class="wrap header-inner">
       <nav>
         <ul class="nav-menu">
-
-          <!-- MENU LINKS CORRETTI -->
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="nextlevel/index.html" class="nav-link">Next Level</a></li>
-
           <li><a href="whiteparty/whiteparty.html" class="nav-link">White Party</a></li>
           <li><a href="summervibes/summervibes.html" class="nav-link">Summer Vibes</a></li>
           <li><a href="easterparty/index.html" class="nav-link">Easter Party</a></li>
           <li><a href="newyear.html" class="nav-link active">New Year Party</a></li>
-
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- HERO VIDEO -->
+  <!-- HERO -->
   <section class="hero">
-    <video autoplay muted loop>
+    <video autoplay muted loop playsinline>
       <source src="assets/fireworks.mp4" type="video/mp4">
     </video>
+
     <div class="hero-content">
       <h1>New Year Party</h1>
       <button id="prenota-btn" class="cta">Prenota Ora</button>
@@ -131,13 +211,15 @@
 
       <input type="text" id="nome" placeholder="Nome" required>
       <input type="text" id="cognome" placeholder="Cognome" required>
+
       <select id="sesso" required>
         <option value="">Seleziona sesso</option>
         <option value="Maschio">Maschio</option>
         <option value="Femmina">Femmina</option>
       </select>
+
       <input type="number" id="anno" placeholder="Anno di nascita (es. 2000)" required>
-      <input type="text" id="instagram" placeholder="Instagram (es. @nomeutente)" required>
+      <input type="text" id="instagram" placeholder="Instagram (es. @utente)" required>
       <input type="tel" id="telefono" placeholder="Telefono" required>
 
       <button id="submit-form">Invia</button>
@@ -146,6 +228,7 @@
     </div>
   </div>
 
+  <!-- SCRIPT -->
   <script>
     const prenotaBtn = document.getElementById('prenota-btn');
     const formPopup = document.getElementById('form-popup');
@@ -155,7 +238,6 @@
 
     prenotaBtn.addEventListener('click', () => {
       formPopup.style.display = 'flex';
-      document.getElementById('nome').focus();
     });
 
     closeBtn.addEventListener('click', () => {
@@ -169,12 +251,12 @@
     }
 
     submitBtn.addEventListener('click', () => {
-      const nome = document.getElementById('nome').value.trim();
-      const cognome = document.getElementById('cognome').value.trim();
-      const sesso = document.getElementById('sesso').value;
-      const anno = document.getElementById('anno').value.trim();
-      const insta = document.getElementById('instagram').value.trim();
-      const tel = document.getElementById('telefono').value.trim();
+      const nome = nome.value.trim();
+      const cognome = cognome.value.trim();
+      const sesso = sesso.value;
+      const anno = anno.value.trim();
+      const insta = instagram.value.trim();
+      const tel = telefono.value.trim();
 
       if (!nome || !cognome || !sesso || !anno || !insta || !tel) {
         msg.style.color = 'red';
@@ -183,7 +265,7 @@
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = "Invio in corso...";
+      submitBtn.textContent = "Invio...";
 
       const payload = {
         data: [
@@ -206,21 +288,21 @@
       .then(res => {
         if (res.ok) {
           msg.style.color = 'limegreen';
-          msg.textContent = "Registrazione avvenuta!";
-          localStorage.setItem('prenotato', 'true');
-          prenotaBtn.disabled = true;
-          prenotaBtn.textContent = "Registrazione già inviata";
+          msg.textContent = "Registrazione inviata!";
+          localStorage.setItem('prenotato','true');
 
           setTimeout(()=>{ formPopup.style.display='none'; },1500);
+
         } else {
           msg.style.color = 'red';
-          msg.textContent = "Errore dal server, riprova";
+          msg.textContent = "Errore, riprova.";
         }
       })
-      .catch(err => {
+      .catch(() => {
         msg.style.color = 'red';
-        msg.textContent = "Errore di connessione";
-        console.error("Errore fetch:", err);
+        msg.textContent = "Errore di connessione.";
+      })
+      .finally(()=>{
         submitBtn.disabled = false;
         submitBtn.textContent = "Invia";
       });
