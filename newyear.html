@@ -4,159 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LA CAJE EVENTS — New Year Party</title>
-
+  <link rel="stylesheet" href="styles.css">
   <style>
-    body {
-      margin:0;
-      font-family:'Montserrat',sans-serif;
-      background:#000;
-      color:#fff;
-    }
-
-    /* NAV BAR */
-    .nav-menu {
-      display:flex;
-      justify-content:center;
-      list-style:none;
-      padding:0;
-      margin:0;
-      gap:25px;
-      flex-wrap:wrap;
-    }
-    .nav-link {
-      text-decoration:none;
-      color:#fff;
-      font-weight:700;
-    }
-    .nav-link.active { color:#0af; }
-
-    /* HERO VIDEO */
-    .hero {
-      position:relative;
-      width:100%;
-      height:100vh;
-      overflow:hidden;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
-
-    /* SFONDO VIDEO */
-    .hero video {
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:0;
-      pointer-events:none !important; /* blocca interazione */
-    }
-
-    /* RIMUOVE PULSANTE PLAY SU IPHONE */
-    video::-webkit-media-controls-start-playback-button {
-      display:none !important;
-      -webkit-appearance:none;
-    }
-
-    .hero-content {
-      position:relative;
-      z-index:2;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:20px;
-      padding:0 20px;
-    }
-
-    .hero-content h1 {
-      font-size:3em;
-      font-weight:800;
-      text-shadow:0 0 15px rgba(255,255,255,0.4);
-    }
-
-    .cta {
-      padding:12px 35px;
-      background:#0af;
-      color:#000;
-      border-radius:50px;
-      font-weight:700;
-      text-decoration:none;
-      transition:0.25s;
-      cursor:pointer;
-    }
+    body { margin:0; font-family:'Montserrat',sans-serif; background:#050505; color:#fff; }
+    .hero { position:relative; width:100%; height:100vh; overflow:hidden; display:flex; justify-content:center; align-items:center; text-align:center; }
+    .hero video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+    .hero-content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:20px; }
+    .cta { padding:12px 35px; background:#0af; color:#000; border-radius:50px; font-weight:700; text-decoration:none; transition:0.25s; cursor:pointer; }
     .cta:hover { background:#00d5ff; }
 
-    /* POPUP FORM */
     #form-popup {
-      display:none;
-      position:fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background: rgba(0,0,0,0.85);
-      justify-content:center;
-      align-items:center;
+      display:none; 
+      position:fixed; 
+      top:0; left:0; width:100%; height:100%; 
+      background: rgba(0,0,0,0.85); 
+      justify-content:center; 
+      align-items:center; 
       z-index:20;
-      padding:15px;
+      animation: fadeIn 0.3s ease forwards;
     }
 
     #form-inner {
       background: linear-gradient(135deg, rgba(10,200,255,0.2), rgba(0,150,255,0.1));
-      padding: 30px 20px;
+      padding: 35px;
       border-radius: 20px;
-      display:flex;
-      flex-direction:column;
-      gap:15px;
-      width:100%;
-      max-width:420px;
-      box-shadow:0 0 30px rgba(0,200,255,0.5);
+      display:flex; 
+      flex-direction:column; 
+      gap:15px; 
+      width:90%; 
+      max-width:450px;
+      box-shadow: 0 0 30px rgba(0,200,255,0.5);
+      transform: scale(0.8);
+      opacity: 0;
+      animation: popupIn 0.4s forwards;
     }
 
-    #form-inner input,
-    #form-inner select {
-      padding:12px;
-      border-radius:8px;
-      border:none;
-      background: rgba(255,255,255,0.12);
+    #form-inner input, #form-inner select {
+      padding:12px; 
+      border-radius:8px; 
+      border:none; 
+      outline:none; 
+      font-size:16px; 
+      background: rgba(255,255,255,0.1); 
       color:#fff;
-      font-size:16px;
     }
 
-    #form-inner input::placeholder { color:#ddd; }
+    #form-inner input::placeholder,
+    #form-inner select { color:#ddd; }
 
     #submit-form {
-      padding:12px;
-      background:#0af;
-      color:#000;
-      border:none;
-      border-radius:50px;
-      font-weight:700;
+      padding:12px; 
+      background:#0af; 
+      color:#000; 
+      border:none; 
+      border-radius:50px; 
+      font-weight:700; 
       cursor:pointer;
+      transition:0.3s;
     }
+
+    #submit-form:hover { background:#00d5ff; }
 
     #close-form {
-      padding:10px;
-      background:#ff0033;
-      border:none;
-      border-radius:50px;
-      color:white;
+      background:#ff0033; 
+      color:#fff; 
+      border:none; 
+      border-radius:50px; 
+      padding:10px; 
       cursor:pointer;
+      margin-top:10px;
+      transition:0.3s;
     }
 
-    #form-msg {
-      font-weight:700;
-      text-align:center;
+    #close-form:hover { background:#ff3366; }
+
+    #form-msg { font-weight:700; text-align:center; margin-top:10px; }
+
+    @keyframes fadeIn {
+      from { opacity:0; }
+      to { opacity:1; }
     }
 
-    @media (max-width: 768px) {
-      .hero { height: 85vh; }
-      .hero-content h1 { font-size: 2.2em; }
-      .cta { padding: 12px 28px; font-size: 1em; }
-      #form-inner { padding:20px 18px; max-width: 360px; }
-      #form-inner input,
-      #form-inner select { font-size:15px; padding:10px; }
-      .nav-menu { gap: 12px; font-size: 0.9em; }
+    @keyframes popupIn {
+      from { transform: scale(0.8); opacity:0; }
+      to { transform: scale(1); opacity:1; }
     }
   </style>
 </head>
@@ -164,35 +95,29 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <nav>
-      <ul class="nav-menu">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="nextlevel/index.html" class="nav-link">Next Level</a></li>
-        <li><a href="whiteparty/whiteparty.html" class="nav-link">White Party</a></li>
-        <li><a href="summervibes/summervibes.html" class="nav-link">Summer Vibes</a></li>
-        <li><a href="easterparty/index.html" class="nav-link">Easter Party</a></li>
-        <li><a href="newyear.html" class="nav-link active">New Year Party</a></li>
-      </ul>
-    </nav>
+    <div class="wrap header-inner">
+      <nav>
+        <ul class="nav-menu">
+
+          <!-- MENU LINKS CORRETTI -->
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="nextlevel/index.html" class="nav-link">Next Level</a></li>
+
+          <li><a href="whiteparty/whiteparty.html" class="nav-link">White Party</a></li>
+          <li><a href="summervibes/summervibes.html" class="nav-link">Summer Vibes</a></li>
+          <li><a href="easterparty/index.html" class="nav-link">Easter Party</a></li>
+          <li><a href="newyear.html" class="nav-link active">New Year Party</a></li>
+
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <!-- HERO -->
+  <!-- HERO VIDEO -->
   <section class="hero">
-
-    <video
-      id="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      webkit-playsinline
-      preload="auto"
-      poster="assets/poster.jpg"
-      disableremoteplayback
-    >
+    <video autoplay muted loop>
       <source src="assets/fireworks.mp4" type="video/mp4">
     </video>
-
     <div class="hero-content">
       <h1>New Year Party</h1>
       <button id="prenota-btn" class="cta">Prenota Ora</button>
@@ -206,15 +131,13 @@
 
       <input type="text" id="nome" placeholder="Nome" required>
       <input type="text" id="cognome" placeholder="Cognome" required>
-
       <select id="sesso" required>
         <option value="">Seleziona sesso</option>
         <option value="Maschio">Maschio</option>
         <option value="Femmina">Femmina</option>
       </select>
-
       <input type="number" id="anno" placeholder="Anno di nascita (es. 2000)" required>
-      <input type="text" id="instagram" placeholder="Instagram (es. @utente)" required>
+      <input type="text" id="instagram" placeholder="Instagram (es. @nomeutente)" required>
       <input type="tel" id="telefono" placeholder="Telefono" required>
 
       <button id="submit-form">Invia</button>
@@ -223,33 +146,22 @@
     </div>
   </div>
 
-  <!-- SCRIPT -->
   <script>
-    /* FORZA RIPRODUZIONE VIDEO SU IPHONE */
-    const video = document.getElementById('hero-video');
-
-    function forcePlay() {
-      video.muted = true;
-      video.play().catch(() => {});
-    }
-
-    document.addEventListener("DOMContentLoaded", forcePlay);
-    window.addEventListener("load", forcePlay);
-
-    // iPhone: parte al primo tocco
-    document.addEventListener("touchstart", () => {
-      forcePlay();
-    }, { once: true });
-
-    // FORM POPUP
     const prenotaBtn = document.getElementById('prenota-btn');
     const formPopup = document.getElementById('form-popup');
     const closeBtn = document.getElementById('close-form');
     const submitBtn = document.getElementById('submit-form');
     const msg = document.getElementById('form-msg');
 
-    prenotaBtn.addEventListener('click', () => { formPopup.style.display = 'flex'; });
-    closeBtn.addEventListener('click', () => { formPopup.style.display='none'; msg.textContent=''; });
+    prenotaBtn.addEventListener('click', () => {
+      formPopup.style.display = 'flex';
+      document.getElementById('nome').focus();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      formPopup.style.display = 'none';
+      msg.textContent = '';
+    });
 
     if(localStorage.getItem('prenotato')) {
       prenotaBtn.disabled = true;
@@ -257,56 +169,60 @@
     }
 
     submitBtn.addEventListener('click', () => {
-      const nomeVal = nome.value.trim();
-      const cognomeVal = cognome.value.trim();
-      const sessoVal = sesso.value;
-      const annoVal = anno.value.trim();
-      const instaVal = instagram.value.trim();
-      const telVal = telefono.value.trim();
+      const nome = document.getElementById('nome').value.trim();
+      const cognome = document.getElementById('cognome').value.trim();
+      const sesso = document.getElementById('sesso').value;
+      const anno = document.getElementById('anno').value.trim();
+      const insta = document.getElementById('instagram').value.trim();
+      const tel = document.getElementById('telefono').value.trim();
 
-      if(!nomeVal || !cognomeVal || !sessoVal || !annoVal || !instaVal || !telVal) {
-        msg.style.color='red';
-        msg.textContent="Compila tutti i campi!";
+      if (!nome || !cognome || !sesso || !anno || !insta || !tel) {
+        msg.style.color = 'red';
+        msg.textContent = "Compila tutti i campi!";
         return;
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent="Invio...";
+      submitBtn.textContent = "Invio in corso...";
 
       const payload = {
-        data: [{
-          "NOME": nomeVal,
-          "COGNOME": cognomeVal,
-          "SESSO": sessoVal,
-          "ANNO DI NASCITA": annoVal,
-          "INSTAGRAM": instaVal,
-          "TELEFONO": telVal
-        }]
+        data: [
+          {
+            "NOME": nome,
+            "COGNOME": cognome,
+            "SESSO": sesso,
+            "ANNO DI NASCITA": anno,
+            "INSTAGRAM": insta,
+            "TELEFONO": tel
+          }
+        ]
       };
 
       fetch('https://sheetdb.io/api/v1/0el2b6c0k82lp', {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json' },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       })
-      .then(res=>{
-        if(res.ok){
-          msg.style.color='limegreen';
-          msg.textContent="Registrazione inviata!";
-          localStorage.setItem('prenotato','true');
+      .then(res => {
+        if (res.ok) {
+          msg.style.color = 'limegreen';
+          msg.textContent = "Registrazione avvenuta!";
+          localStorage.setItem('prenotato', 'true');
+          prenotaBtn.disabled = true;
+          prenotaBtn.textContent = "Registrazione già inviata";
+
           setTimeout(()=>{ formPopup.style.display='none'; },1500);
         } else {
-          msg.style.color='red';
-          msg.textContent="Errore, riprova.";
+          msg.style.color = 'red';
+          msg.textContent = "Errore dal server, riprova";
         }
       })
-      .catch(()=>{
-        msg.style.color='red';
-        msg.textContent="Errore di connessione.";
-      })
-      .finally(()=>{
-        submitBtn.disabled=false;
-        submitBtn.textContent="Invia";
+      .catch(err => {
+        msg.style.color = 'red';
+        msg.textContent = "Errore di connessione";
+        console.error("Errore fetch:", err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Invia";
       });
     });
   </script>
