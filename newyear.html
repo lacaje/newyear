@@ -41,6 +41,8 @@
       align-items:center;
       text-align:center;
     }
+
+    /* SFONDO VIDEO */
     .hero video {
       position:absolute;
       top:0;
@@ -49,8 +51,15 @@
       height:100%;
       object-fit:cover;
       z-index:0;
-      pointer-events:none;
+      pointer-events:none !important; /* blocca interazione */
     }
+
+    /* RIMUOVE PULSANTE PLAY SU IPHONE */
+    video::-webkit-media-controls-start-playback-button {
+      display:none !important;
+      -webkit-appearance:none;
+    }
+
     .hero-content {
       position:relative;
       z-index:2;
@@ -60,6 +69,7 @@
       gap:20px;
       padding:0 20px;
     }
+
     .hero-content h1 {
       font-size:3em;
       font-weight:800;
@@ -168,15 +178,17 @@
 
   <!-- HERO -->
   <section class="hero">
+
     <video
       id="hero-video"
       autoplay
-      playsinline
-      webkit-playsinline
       muted
       loop
+      playsinline
+      webkit-playsinline
       preload="auto"
       poster="assets/poster.jpg"
+      disableremoteplayback
     >
       <source src="assets/fireworks.mp4" type="video/mp4">
     </video>
@@ -213,21 +225,21 @@
 
   <!-- SCRIPT -->
   <script>
-    // FORZA IL VIDEO A PARTIRE SU MOBILE
+    /* FORZA RIPRODUZIONE VIDEO SU IPHONE */
     const video = document.getElementById('hero-video');
 
-    function tryPlay() {
+    function forcePlay() {
+      video.muted = true;
       video.play().catch(() => {});
     }
 
-    document.addEventListener("DOMContentLoaded", tryPlay);
-    window.addEventListener("load", tryPlay);
+    document.addEventListener("DOMContentLoaded", forcePlay);
+    window.addEventListener("load", forcePlay);
 
-    // Per iPhone: parte al primo tocco
-    document.addEventListener("touchstart", function () {
-      tryPlay();
+    // iPhone: parte al primo tocco
+    document.addEventListener("touchstart", () => {
+      forcePlay();
     }, { once: true });
-
 
     // FORM POPUP
     const prenotaBtn = document.getElementById('prenota-btn');
@@ -237,7 +249,7 @@
     const msg = document.getElementById('form-msg');
 
     prenotaBtn.addEventListener('click', () => { formPopup.style.display = 'flex'; });
-    closeBtn.addEventListener('click', () => { formPopup.style.display = 'none'; msg.textContent=''; });
+    closeBtn.addEventListener('click', () => { formPopup.style.display='none'; msg.textContent=''; });
 
     if(localStorage.getItem('prenotato')) {
       prenotaBtn.disabled = true;
@@ -252,26 +264,24 @@
       const instaVal = instagram.value.trim();
       const telVal = telefono.value.trim();
 
-      if (!nomeVal || !cognomeVal || !sessoVal || !annoVal || !instaVal || !telVal) {
+      if(!nomeVal || !cognomeVal || !sessoVal || !annoVal || !instaVal || !telVal) {
         msg.style.color='red';
         msg.textContent="Compila tutti i campi!";
         return;
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = "Invio...";
+      submitBtn.textContent="Invio...";
 
       const payload = {
-        data: [
-          {
-            "NOME": nomeVal,
-            "COGNOME": cognomeVal,
-            "SESSO": sessoVal,
-            "ANNO DI NASCITA": annoVal,
-            "INSTAGRAM": instaVal,
-            "TELEFONO": telVal
-          }
-        ]
+        data: [{
+          "NOME": nomeVal,
+          "COGNOME": cognomeVal,
+          "SESSO": sessoVal,
+          "ANNO DI NASCITA": annoVal,
+          "INSTAGRAM": instaVal,
+          "TELEFONO": telVal
+        }]
       };
 
       fetch('https://sheetdb.io/api/v1/0el2b6c0k82lp', {
@@ -279,8 +289,8 @@
         headers:{ 'Content-Type':'application/json' },
         body: JSON.stringify(payload)
       })
-      .then(res => {
-        if(res.ok) {
+      .then(res=>{
+        if(res.ok){
           msg.style.color='limegreen';
           msg.textContent="Registrazione inviata!";
           localStorage.setItem('prenotato','true');
@@ -290,13 +300,13 @@
           msg.textContent="Errore, riprova.";
         }
       })
-      .catch(() => {
+      .catch(()=>{
         msg.style.color='red';
         msg.textContent="Errore di connessione.";
       })
-      .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Invia";
+      .finally(()=>{
+        submitBtn.disabled=false;
+        submitBtn.textContent="Invia";
       });
     });
   </script>
