@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LA CAJE EVENTS — New Year Party</title>
-  <link rel="stylesheet" href="styles.css">
+
   <style>
     body {
       margin:0;
       font-family:'Montserrat',sans-serif;
-      background:#000; /* sfondo nero uniforme */
+      background:#000;
       color:#fff;
     }
 
@@ -21,7 +21,7 @@
       padding:0;
       margin:0;
       gap:25px;
-      flex-wrap:wrap; /* FIX smartphone */
+      flex-wrap:wrap;
     }
     .nav-link {
       text-decoration:none;
@@ -139,37 +139,14 @@
       text-align:center;
     }
 
-    /* ------------------- SMARTPHONE FIXES ------------------- */
     @media (max-width: 768px) {
-
-      .hero {
-        height: 85vh; /* migliore taglio video smartphone */
-      }
-
-      .hero-content h1 {
-        font-size: 2.2em;
-      }
-
-      .cta {
-        padding: 12px 28px;
-        font-size: 1em;
-      }
-
-      #form-inner {
-        padding:20px 18px;
-        max-width: 360px;
-      }
-
+      .hero { height: 85vh; }
+      .hero-content h1 { font-size: 2.2em; }
+      .cta { padding: 12px 28px; font-size: 1em; }
+      #form-inner { padding:20px 18px; max-width: 360px; }
       #form-inner input,
-      #form-inner select {
-        font-size:15px;
-        padding:10px;
-      }
-
-      .nav-menu {
-        gap: 12px;
-        font-size: 0.9em;
-      }
+      #form-inner select { font-size:15px; padding:10px; }
+      .nav-menu { gap: 12px; font-size: 0.9em; }
     }
   </style>
 </head>
@@ -177,23 +154,30 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <div class="wrap header-inner">
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="nextlevel/index.html" class="nav-link">Next Level</a></li>
-          <li><a href="whiteparty/whiteparty.html" class="nav-link">White Party</a></li>
-          <li><a href="summervibes/summervibes.html" class="nav-link">Summer Vibes</a></li>
-          <li><a href="easterparty/index.html" class="nav-link">Easter Party</a></li>
-          <li><a href="newyear.html" class="nav-link active">New Year Party</a></li>
-        </ul>
-      </nav>
-    </div>
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="nextlevel/index.html" class="nav-link">Next Level</a></li>
+        <li><a href="whiteparty/whiteparty.html" class="nav-link">White Party</a></li>
+        <li><a href="summervibes/summervibes.html" class="nav-link">Summer Vibes</a></li>
+        <li><a href="easterparty/index.html" class="nav-link">Easter Party</a></li>
+        <li><a href="newyear.html" class="nav-link active">New Year Party</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <video id="hero-video" autoplay muted loop playsinline>
+    <video
+      id="hero-video"
+      autoplay
+      playsinline
+      webkit-playsinline
+      muted
+      loop
+      preload="auto"
+      poster="assets/poster.jpg"
+    >
       <source src="assets/fireworks.mp4" type="video/mp4">
     </video>
 
@@ -229,20 +213,21 @@
 
   <!-- SCRIPT -->
   <script>
-    // HERO VIDEO AUTOPLAY MOBILE
+    // FORZA IL VIDEO A PARTIRE SU MOBILE
     const video = document.getElementById('hero-video');
 
-    const playVideo = () => {
-      video.play().catch(err => {
-        console.log("Autoplay bloccato, riprovo con user gesture", err);
-      });
+    function tryPlay() {
+      video.play().catch(() => {});
     }
 
-    playVideo();
+    document.addEventListener("DOMContentLoaded", tryPlay);
+    window.addEventListener("load", tryPlay);
 
-    document.body.addEventListener('touchstart', () => {
-      playVideo();
-    }, {once:true});
+    // Per iPhone: parte al primo tocco
+    document.addEventListener("touchstart", function () {
+      tryPlay();
+    }, { once: true });
+
 
     // FORM POPUP
     const prenotaBtn = document.getElementById('prenota-btn');
@@ -251,14 +236,8 @@
     const submitBtn = document.getElementById('submit-form');
     const msg = document.getElementById('form-msg');
 
-    prenotaBtn.addEventListener('click', () => {
-      formPopup.style.display = 'flex';
-    });
-
-    closeBtn.addEventListener('click', () => {
-      formPopup.style.display = 'none';
-      msg.textContent = '';
-    });
+    prenotaBtn.addEventListener('click', () => { formPopup.style.display = 'flex'; });
+    closeBtn.addEventListener('click', () => { formPopup.style.display = 'none'; msg.textContent=''; });
 
     if(localStorage.getItem('prenotato')) {
       prenotaBtn.disabled = true;
@@ -266,16 +245,16 @@
     }
 
     submitBtn.addEventListener('click', () => {
-      const nomeVal = document.getElementById('nome').value.trim();
-      const cognomeVal = document.getElementById('cognome').value.trim();
-      const sessoVal = document.getElementById('sesso').value;
-      const annoVal = document.getElementById('anno').value.trim();
-      const instaVal = document.getElementById('instagram').value.trim();
-      const telVal = document.getElementById('telefono').value.trim();
+      const nomeVal = nome.value.trim();
+      const cognomeVal = cognome.value.trim();
+      const sessoVal = sesso.value;
+      const annoVal = anno.value.trim();
+      const instaVal = instagram.value.trim();
+      const telVal = telefono.value.trim();
 
       if (!nomeVal || !cognomeVal || !sessoVal || !annoVal || !instaVal || !telVal) {
-        msg.style.color = 'red';
-        msg.textContent = "Compila tutti i campi!";
+        msg.style.color='red';
+        msg.textContent="Compila tutti i campi!";
         return;
       }
 
@@ -296,28 +275,26 @@
       };
 
       fetch('https://sheetdb.io/api/v1/0el2b6c0k82lp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
         body: JSON.stringify(payload)
       })
       .then(res => {
-        if (res.ok) {
-          msg.style.color = 'limegreen';
-          msg.textContent = "Registrazione inviata!";
+        if(res.ok) {
+          msg.style.color='limegreen';
+          msg.textContent="Registrazione inviata!";
           localStorage.setItem('prenotato','true');
-
           setTimeout(()=>{ formPopup.style.display='none'; },1500);
-
         } else {
-          msg.style.color = 'red';
-          msg.textContent = "Errore, riprova.";
+          msg.style.color='red';
+          msg.textContent="Errore, riprova.";
         }
       })
       .catch(() => {
-        msg.style.color = 'red';
-        msg.textContent = "Errore di connessione.";
+        msg.style.color='red';
+        msg.textContent="Errore di connessione.";
       })
-      .finally(()=>{
+      .finally(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = "Invia";
       });
